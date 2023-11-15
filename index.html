@@ -3,18 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Gifs</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <button>CAT!</button>
+  <br>
   <img src="#">
   <script>
     const img = document.querySelector('img');
-    fetch("https://api.giphy.com/v1/gifs/translate?api_key=lORGOCyD56dtG7gGvzGuKGebQ0bcrbQm&s=cats", { mode:"cors" })
-    .then(function(response) {
-        return (response.json())
+
+    function loadGIF() {
+        fetch("https://api.giphy.com/v1/gifs/translate?api_key=lORGOCyD56dtG7gGvzGuKGebQ0bcrbQm&s=cats", { mode:"cors" })
+        .then(function(response) {
+            return (response.json())
+        })
+        .then(function(response) {
+            img.src = response.data.images.original.url;
+        });
+    }
+
+    loadGIF();
+
+    const button = document.querySelector('button');
+    button.addEventListener('click', () => {
+        loadGIF();
     })
-    .then(function(response) {
-        img.src = response.data.images.original.url;
-    });
   </script>
 </body>
 </html>
