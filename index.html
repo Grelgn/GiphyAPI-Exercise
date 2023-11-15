@@ -6,14 +6,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button>CAT!</button>
+  <input type="text">
+  <button>Search GIF</button>
   <br>
   <img src="#">
   <script>
     const img = document.querySelector('img');
 
-    function loadGIF() {
-        fetch("https://api.giphy.com/v1/gifs/translate?api_key=lORGOCyD56dtG7gGvzGuKGebQ0bcrbQm&s=cats", { mode:"cors" })
+    function loadGIF(input) {
+        fetch("https://api.giphy.com/v1/gifs/translate?api_key=lORGOCyD56dtG7gGvzGuKGebQ0bcrbQm&s=" + input, { mode:"cors" })
         .then(function(response) {
             return (response.json())
         })
@@ -22,11 +23,16 @@
         });
     }
 
-    loadGIF();
+    loadGIF("cats");
 
     const button = document.querySelector('button');
     button.addEventListener('click', () => {
-        loadGIF();
+        const input = document.querySelector('input').value;
+        if (input !== "") {
+            loadGIF(input);
+        } else {
+            loadGIF("error");
+        }
     })
   </script>
 </body>
